@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    .hover-icon svg path {
+        transition: stroke 0.2s ease;
+    }
+
+    .hover-icon:hover svg path {
+        stroke: #fcba03;
+    }
+
+    a {
+        color: #000000;
+        position: relative;
+    }
+
+    a::after {
+        content: '';
+        background-color: #facc15;
+        height: 2px;
+        width: 0%;
+        left: 0;
+        bottom: -1px;
+        position: absolute;
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+    }
+
+    a:hover,
+    a:focus {
+        color: #fcba03;
+    }
+
+    a:hover::after,
+    a:focus::after {
+        width: 100%;
+    }
+
+    button {
+        color: #000000;
+        position: relative;
+    }
+
+    button::after {
+        content: '';
+        background-color: #facc15;
+        height: 1px;
+        width: 0%;
+        left: 0;
+        bottom: -1px;
+        position: absolute;
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+    }
+
+    button:hover {
+        color: #fcba03;
+    }
+
+    button:hover::after {
+        width: 100%;
+    }
+    
+    .active-btn::after {
+        width: 100%;
+    }
+
+    .active-btn {
+        color: #fcba03;
+    }
+
+    .dropdown {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+
+    .dropdown.active {
+        max-height: 400px; /* Adjust as needed */
+        opacity: 1;
+    }
+    .nav-link{
+    max-height: 70vh; /* Adjust height as needed */
+    overflow-y: scroll; /* Enable scrolling */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    }
+
+    /* For WebKit browsers like Chrome, Safari, and Edge */
+    .nav-link::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<body class="bg-slate-200 h-screen font-[Poppins]">
+    <header class="fixed top-0 left-0 w-full z-[2]">
+        <nav class="flex justify-between  items-center mx-auto transition-all duration-300 bg-white h-20 px-8 shadow-sm">
+            <div>
+                <img src="img/logo.png" alt="logo" class="md:h-11 h-10 transition-all duration-300">
+            </div>
+            <div class="nav-link z-[-1] lg:z-auto max-height-[100vh] transition-all duration-500 lg:static absolute bg-white shadow-sm lg:shadow-none lg:min-h-fit left-0 top-[-600%] lg:w-auto w-full flex items-center px-5 py-5">
+                <ul class="flex lg:flex-row flex-col pl-2 lg:pl-0 lg:ml-[400px] lg:gap-[2vw] gap-[4vw]">
+                    <li><a class="link" href="">Home</a></li>
+                    <li>
+                        <button onclick="toggleDropdown(event)" class="dropbtn">About Us
+                            <ion-icon id="dropdown-icon" name="caret-down" class="text-xs transition-transform duration-500"></ion-icon>
+                        </button>
+                        <div id="dropdown-content" class="dropdown lg:absolute lg:z-9 bg-white lg:top-[110%] lg:left-[600px] lg:min-h-[15vh] min-w-[47vh] mx-auto">
+                            <a href="#" class="block pt-5 ml-3 lg:ml-8 w-fit">Mission and Vision</a>
+                            <a href="#" class="block pt-5 ml-3 lg:ml-8 w-fit">Message from the School President</a>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- Click Button -->
+                        <button onclick="toggleDropdown2(event)" class="dropbtn2">Acedamic
+                            <ion-icon id="dropdown-icon2" name="caret-down" class="text-xs transition-transform duration-500"></ion-icon>
+                        </button>
+                        <!--Button-->
+                        <div id="dropdown-content2" class="dropdown lg:absolute lg:z-[20] bg-white lg:top-[110%] lg:left-[750px] lg:min-h-[15vh] min-w-[37vh] mx-auto">
+                            <button onclick="toggleEN(event)" class="dropbtn3 block pt-5 ml-3 lg:ml-8 w-fit">General English Program
+                                <ion-icon id="dropdown-icon3" name="caret-down" class="text-xs transition-transform duration-500"></ion-icon>
+                            </button>
+                            <!--Content-->
+                            <div id="dropdown-en" class="dropdown lg:absolute lg:z-auto bg-white lg:top-[110%] lg:left-[600px] lg:min-h-[15vh] h-[32vh] min-w-[47vh] mx-auto">
+                                <a href="#" class="block pt-5 ml-5 lg:ml-8 w-fit">Kindergarten</a>
+                                <a href="#" class="block pt-5 ml-5 lg:ml-8 w-fit">Primary</a>
+                                <a href="#" class="block pt-5 ml-5 lg:ml-8 w-fit">Lower Secondary</a>
+                                <a href="#" class="block pt-5 ml-5 lg:ml-8 w-fit">Secondary</a>
+                                <a href="#" class="block pt-5 ml-5 lg:ml-8 w-fit">Part time Class</a>
+                            </div>
+                            <!--Button-->
+                            <button onclick="toggleKH(event)" class="dropbtn4 block pt-5 ml-3 lg:ml-8 w-fit">General Khmer Program
+                                <ion-icon id="dropdown-icon4" name="caret-down" class="text-xs transition-transform duration-500"></ion-icon>
+                            </button>
+                            <!--Content-->
+                            <div id="dropdown-kh" class="dropdown lg:absolute lg:z-auto bg-white lg:top-[110%] lg:left-[600px] lg:min-h-[15vh] min-w-[47vh] mx-auto">
+                                <a href="#" class="block pt-5 ml-5 lg:ml-8 w-fit">Kindergarten</a>
+                                <a href="#" class="block pt-5 ml-5 lg:ml-8 w-fit">Primary</a>
+                                <a href="#" class="block pt-5 ml-5 lg:ml-8 w-fit">High School</a>
+                            </div>
+                        </div>
+                
+                    </li>
+                    <li><a href="">Admission</a></li>
+                    <li><a href="">News and Event</a></li>
+                    <li><a href="">Career</a></li>
+                </ul>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="hover-icon cursor-pointer px-0">
+                    <svg height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="bg-black opacity-80 rounded-md w-[2px] h-5"></div>
+                <div class="flex items-center gap-4 bg-white shadow-sm w-[70px]">
+                    <img src="img/en.png" class="h-5" alt="Language">
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </div>
+                <div class="lg:hidden">
+                    <ion-icon onclick="openNav(this)" name="menu" class="cursor-pointer text-3xl"></ion-icon>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<!-----------------------Header------------------------------>
+<div class="bg-white xl:h-[100vh] lg:h-[100vh] relative z-[1]">
+
+    <!-------------------------Header Text------------------------------>
+    <div class="absolute z-[11] xl:top-[200px] lg:top-[160px] top-[230px] xl:left-[70px] left-[40px]">
+        <h1 class="xl:text-5xl lg:text-4xl md:text-3xl text-white lg:text-black text-2xl font-normal">WELCOME TO</h1>
+        <h1 class="xl:text-5xl lg:text-4xl md:text-3xl text-white lg:text-black text-2xl font-normal">MILKY WAY SCHOOL</h1>
+        <h3 class="xl:text-3xl text-xl lg:pt-8 md:pt-[30px] pt-[80px] font-semibold bg-gradient-to-r from-[#F2BE1A] via-[#FFE79D] to-[#F2BE1A] bg-clip-text text-transparent">
+            Register now
+        </h3>
+        <p class="xl:pt-5 lg:pt-4 pt-3 xl:text-base lg:text-sm text-white text-xs lg:text-black max-sm:text-black  text-justify">
+            Start on April 29, 2024 and have a special discount<br> 
+            for this month's registration.
+        </p>
+        <div>
+            <button class="bg-[#2B91C6] z-20 cursor-pointer text-white font-normal lg:text-sm text-xs 
+            lg:px-6 px-5 lg:py-3.5 py-3 xl:mt-10 lg:mt-5 mt-5 transition duration-300 ease-in-out transform hover:bg-[#1A6F9C] hover:shadow-lg hover:scale-105">
+                Learn More
+            </button>
+        </div>
+    </div>
+    <!-------------------------Header Text------------------------------>
+
+    <div class="absolute xl:top-[120px] lg:top-[130px] xl:right-[70px] lg:right-[60px] z-10">
+        <video src="video/v1.mp4" class="lg:h-[34vw] h-[75vw] max-sm:h-[80vw] lg:w-[52vw] object-cover" autoplay loop muted playsinline></video>
+    </div>
+    
+    <div class="absolute xl:top-[333px] lg:top-[230px] right-0 lg:z-5 hidden lg:block">
+        <img src="img/bg-1.png" class="xl:h-[407px] lg:h-[330px] object-bottom-left">
+    </div>
+
+
+</div>
+<!-----------------------Header------------------------------>
+
+    <!-----------------------Why MWS------------------------------>
+    <div class="bg-[#F4F7F8] h-[100vh]">
+
+        <!-------------------------Why MWS Pic------------------------------>
+        <div class="xl:mt-[100px]">
+            <img src="img/whymws.jpg" class="xl:h-[440px] object-cover">
+        </div>
+
+    </div>
+
+
+
+    <script>
+    function openNav(e) {
+        e.name = e.name === 'close' ? 'menu' : 'close';
+        const navLink = document.querySelector('.nav-link');
+        navLink.classList.toggle('top-[100%]');
+        navLink.classList.toggle('z-[-2]');
+    }
+
+    function toggleDropdown(event) {
+        const dropdownContent = document.getElementById("dropdown-content");
+        const dropdownIcon = document.getElementById("dropdown-icon");
+        const dropbtn = event.target.closest('button');
+
+        dropdownContent.classList.toggle("active");
+        dropdownIcon.name = dropdownContent.classList.contains("active") ? 'caret-up' : 'caret-down';
+
+        // Toggle the active-btn class to control the ::after animation
+        dropbtn.classList.toggle("active-btn");
+
+        event.stopPropagation(); // Stop the event from bubbling up to the document
+    }
+
+    function toggleDropdown2(event) {
+        const dropdownContent = document.getElementById("dropdown-content2");
+        const dropdownIcon = document.getElementById("dropdown-icon2");
+        const dropbtn = event.target.closest('button');
+
+        dropdownContent.classList.toggle("active");
+        dropdownIcon.name = dropdownContent.classList.contains("active") ? 'caret-up' : 'caret-down';
+
+        // Toggle the active-btn class to control the ::after animation
+        dropbtn.classList.toggle("active-btn");
+
+        event.stopPropagation(); // Stop the event from bubbling up to the document
+    }
+
+    function toggleEN(event) {
+        const dropdownContent = document.getElementById("dropdown-en");
+        const dropdownIcon = document.getElementById("dropdown-icon3");
+        const dropbtn = event.target.closest('button');
+
+        dropdownContent.classList.toggle("active");
+        dropdownIcon.name = dropdownContent.classList.contains("active") ? 'caret-up' : 'caret-down';
+
+        // Toggle the active-btn class to control the ::after animation
+        dropbtn.classList.toggle("active-btn");
+
+        event.stopPropagation(); // Stop the event from bubbling up to the document
+    }
+
+    function toggleKH(event) {
+        const dropdownContent = document.getElementById("dropdown-kh");
+        const dropdownIcon = document.getElementById("dropdown-icon4");
+        const dropbtn = event.target.closest('button');
+
+        dropdownContent.classList.toggle("active");
+        dropdownIcon.name = dropdownContent.classList.contains("active") ? 'caret-up' : 'caret-down';
+
+        // Toggle the active-btn class to control the ::after animation
+        dropbtn.classList.toggle("active-btn");
+
+        event.stopPropagation(); // Stop the event from bubbling up to the document
+    }
+
+    document.addEventListener('click', function(event) {
+        const dropdownContent = document.querySelectorAll("#dropdown-content, #dropdown-content2, #dropdown-en, #dropdown-kh");
+        const dropdownIcon = document.querySelectorAll("#dropdown-icon, #dropdown-icon2, #dropdown-icon3, #dropdown-icon4");
+        const dropdownButton = document.querySelectorAll('.dropbtn, .dropbtn2, .dropbtn3, .dropbtn4');
+
+        dropdownContent.forEach(function(dropdown) {
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove("active");
+            }
+        });
+
+        dropdownIcon.forEach(function(icon) {
+            icon.name = 'caret-down';
+        });
+
+        dropdownButton.forEach(function(button) {
+            button.classList.remove("active-btn");
+        });
+    });
+</script>
+</body>
+
+</html>
